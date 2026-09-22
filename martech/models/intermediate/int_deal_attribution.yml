@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: int_deal_attribution
+    columns:
+      - name: deal_id
+        tests: [not_null, unique]

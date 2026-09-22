@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_raw_meta_ads
+    meta:
+      contains_pii: true
+    columns:
+      - name: date
+        tests: [not_null]
+      - name: campaign_id
+        tests: [not_null]
+      - name: campaign_name
+        meta:
+          contains_pii: true
+          pii_category: name
+        tests: [not_null]
+      - name: impressions
+        tests: [not_null]
+      - name: clicks
+        tests: [not_null]
+      - name: spend
+        tests: [not_null]
+      - name: conversions
+        tests: [not_null]

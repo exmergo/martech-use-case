@@ -1,0 +1,5 @@
+name: martech
+version: 1.0.0
+profile: martech
+model-paths:
+- models

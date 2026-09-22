@@ -1,0 +1,10 @@
+connector: duckdb
+duckdb:
+  path: data/martech.duckdb
+dbt_target: dev
+project:
+  format: dagster
+  options:
+    assets: martech.definitions:all_assets
+    name: martech-use-case
+dbt_project_dir: martech

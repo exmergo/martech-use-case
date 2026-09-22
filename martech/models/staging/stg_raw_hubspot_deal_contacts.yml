@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: stg_raw_hubspot_deal_contacts
+    columns:
+      - name: deal_id
+        tests: [not_null]
+      - name: contact_id
+        tests: [not_null]

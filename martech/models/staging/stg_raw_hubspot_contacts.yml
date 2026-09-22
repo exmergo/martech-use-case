@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: stg_raw_hubspot_contacts
+    meta:
+      contains_pii: true
+    columns:
+      - name: contact_id
+        tests: [unique, not_null]
+      - name: created_at
+        tests: [not_null]
+      - name: source
+        tests: [not_null]
+      - name: campaign_id
+        tests: [not_null]
+      - name: campaign_name
+        meta:
+          contains_pii: true
+          pii_category: name
+        tests: [not_null]
+      - name: lifecycle_stage
+        tests: [not_null]

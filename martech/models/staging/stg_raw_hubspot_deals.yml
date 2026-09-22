@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: stg_raw_hubspot_deals
+    columns:
+      - name: deal_id
+        tests: [unique, not_null]
+      - name: contact_id
+        tests: [not_null]
+      - name: campaign_id
+        tests: [not_null]
+      - name: deal_amount
+        tests: [not_null]
+      - name: deal_status
+        tests: [not_null]
+      - name: closed_at
+        tests: [not_null]
