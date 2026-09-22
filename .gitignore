@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-generated data and local state
+/data/*.duckdb*
+/data/raw/*.csv
+/.tmp_dagster_home_*/
+/martech/logs/
+/martech/.user.yml
+/*_plan.json
+
+# Dex project config is portable; all other Dex files are runtime artifacts
+/.dex/*
+!/.dex/config.yml

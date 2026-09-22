@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: main
+    schema: main
+    tables:
+      - name: raw_google_ads
+      - name: raw_meta_ads
+      - name: raw_hubspot_contacts
+      - name: raw_hubspot_deals
+      - name: raw_hubspot_deal_contacts
