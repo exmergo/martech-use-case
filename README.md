@@ -16,10 +16,12 @@ Implemented:
 - Dex/dbt staging, intermediate, and mart models;
 - canonical spend, conversion, revenue, CAC, and ROAS metrics;
 - an explicit one-attribution-row-per-deal contract;
-- the `hubspot_second_association` scenario and clean-state recovery.
+- the `hubspot_second_association` scenario and clean-state recovery;
+- an Exmergo Viz dashboard built from the clean analytical marts.
 
-Only `hubspot_second_association` is implemented. Live APIs, additional drift
-scenarios, and a visualization/dashboard layer are **not implemented**.
+Only `hubspot_second_association` is implemented. Live APIs and additional drift
+scenarios are not implemented. The analytical marts are visualized through an
+Exmergo Viz dashboard.
 
 ## Architecture
 
@@ -41,6 +43,12 @@ Dex / dbt transformations and tests
                  |
                  v
             mart_campaign_attribution
+        |
+        v
+CSV exports
+        |
+        v
+Exmergo Viz dashboard
 ```
 
 DuckDB permits one writer at a time, so ingestion groups and transformation
@@ -64,8 +72,14 @@ uses a fixed seed and fixed date range.
 ```text
 .
 |-- .dex/config.yml
+|-- charts/
+|   `-- martech_dashboard.png
 |-- data/
 |   `-- raw/                         # generated CSVs; not committed
+|-- exports/
+|   |-- mart_campaign_attribution.csv
+|   |-- mart_paid_ads_performance.csv
+|   `-- viz_prompts.md
 |-- martech/
 |   |-- assets/                      # Dagster ingestion assets
 |   |-- models/
@@ -162,6 +176,35 @@ not use `distinct` or otherwise deduplicate deals.
 | CAC | `spend / conversions` |
 | ROAS | `revenue / spend` |
 
+## Visualization
+
+The clean analytical marts are exported to CSV and used as inputs to Exmergo Viz.
+
+The dashboard provides an executive view of marketing performance and campaign
+attribution, including:
+
+- Total Spend
+- Total Conversions
+- Total Revenue
+- Overall CAC
+- Campaign ROAS comparison
+- Daily Conversions by Channel
+- Daily Spend by Channel
+
+### Dashboard
+
+[Open the interactive MarTech dashboard](https://viz.exmergo.com/share/7934f1a1-0071-4e5c-83a8-f80d60c5f6b8)
+
+![MarTech Viz dashboard](charts/martech_dashboard.png)
+
+### Viz inputs
+
+The reproducible Viz inputs are stored in `exports/`:
+
+- `mart_campaign_attribution.csv`
+- `mart_paid_ads_performance.csv`
+- `viz_prompts.md`
+
 ## Scenario: `hubspot_second_association`
 
 The implemented scenario keeps the existing deal row and adds a second,
@@ -235,7 +278,6 @@ The following are intentionally outside the current implementation:
 - replay clients or recorded live fixtures;
 - the proposed Google cost-field rename scenario;
 - the proposed Meta token-expiration scenario;
-- visualization or dashboard output;
 - production deployment and scheduling;
 - automated correlation of findings across separate ingestion and
   transformation projects.
