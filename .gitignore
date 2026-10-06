@@ -228,3 +228,6 @@ __marimo__/
 # Dex project config is portable; all other Dex files are runtime artifacts
 /.dex/*
 !/.dex/config.yml
+
+/private_data/
+/martech/models/private/
