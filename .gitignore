@@ -231,3 +231,5 @@ __marimo__/
 
 /private_data/
 /martech/models/private/
+
+/martech/tests/assert_private_mk2_*.sql
